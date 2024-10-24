@@ -33,3 +33,18 @@ export const userColumn = (navigate,pagination, itemsPerPage) => [
       header: () => <span className="column-head"></span>,
     }),
   ];
+
+  export const numberColumn = (navigate,pagination, itemsPerPage) => [
+    columnHelper.accessor("id", {
+      cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+      header: () => <span className="">No</span>,
+    }),
+    columnHelper.accessor("phone", {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: () => <span className="column-head">Phone No</span>,
+    }),
+    columnHelper.accessor("number", {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: () => <span className="">Lucky Draw Number</span>,
+    }),
+  ];
