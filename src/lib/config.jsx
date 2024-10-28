@@ -1,4 +1,5 @@
 import { FaUserGroup } from "react-icons/fa6";
+import { FaWpforms } from "react-icons/fa6";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 
 export const SidebarRoutes = [
@@ -12,6 +13,12 @@ export const SidebarRoutes = [
         id: 'luckydraw',
         label: 'LuckyDraw',
         path: '/dashboard/luckydraw',
-        icon: <FaUserGroup size={20}/>
+        icon: <GiPerspectiveDiceSixFacesRandom size={20}/>
+    },
+    {
+        id: 'eventform',
+        label: 'Event Form',
+        path: '/dashboard/eventform',
+        icon: <FaWpforms  size={20}/>
     },
 ]

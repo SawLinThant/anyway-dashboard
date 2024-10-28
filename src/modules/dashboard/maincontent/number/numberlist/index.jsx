@@ -70,7 +70,7 @@ const NumberList = () => {
         />
         <button
           onClick={() => exportCsv(tableData)}
-          className="min-w-10 h-full rounded font-semibold text-lg hover:cursor-pointer bg-secondary text-white flex flex-row items-center gap-2">
+          className="min-w-4 h-full rounded font-bold text-sm hover:cursor-pointer bg-secondary text-white flex flex-row items-center gap-2">
          <div>export</div><BiExport size={20}/>
         </button>
       </div>
