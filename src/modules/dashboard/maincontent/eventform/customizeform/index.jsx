@@ -5,6 +5,7 @@ import Tag from "../../../../common/components/customtag";
 import { CREATE_THEME, DELETE_THEME } from "../../../../../graphql/mutation/theme";
 import { useForm } from "react-hook-form";
 import { VscLoading } from "react-icons/vsc";
+import ColorCustomization from "../colorcustomization";
 
 const CustomizeForm = () => {
   const [theme, setTheme] = useState();
@@ -95,6 +96,7 @@ const CustomizeForm = () => {
             <div className="w-full h-14 p-4 rounded text-left bg-secondary text-primary">
               <h2 className="font-semibold text-xl">Event Input Field</h2>
             </div>
+            <ColorCustomization/>
           </div>
         </div>
       </div>
