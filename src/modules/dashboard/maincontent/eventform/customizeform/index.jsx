@@ -6,6 +6,7 @@ import { CREATE_THEME, DELETE_THEME } from "../../../../../graphql/mutation/them
 import { useForm } from "react-hook-form";
 import { VscLoading } from "react-icons/vsc";
 import ColorCustomization from "../colorcustomization";
+import FormCustomization from "../editform";
 
 const CustomizeForm = () => {
   const [theme, setTheme] = useState();
@@ -60,7 +61,7 @@ const CustomizeForm = () => {
     }
   },[themeData]);
   return (
-    <section className="w-full h-full flex flex-col gap-4">
+    <section className="w-full h-full flex flex-col gap-8 overflow-y-auto">
       <div className="w-full grid grid-cols-2">
         <div className="w-full px-4 border-r border-gray-500">
           <div className="w-full flex flex-col gap-2">
@@ -94,11 +95,14 @@ const CustomizeForm = () => {
         <div className="w-full px-4">
           <div className="w-full flex flex-col gap-2">
             <div className="w-full h-14 p-4 rounded text-left bg-secondary text-primary">
-              <h2 className="font-semibold text-xl">Event Input Field</h2>
+              <h2 className="font-semibold text-xl">Form Color</h2>
             </div>
             <ColorCustomization/>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+        <FormCustomization/>
       </div>
     </section>
   );

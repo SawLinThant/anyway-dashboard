@@ -38,7 +38,7 @@ const ColorCustomization = () => {
         }))
       );
     }
-  }, [colors]);
+  }, [colorData]);
 
   console.log(colorDataArray);
 
@@ -82,7 +82,7 @@ const ColorCustomization = () => {
             key={color.id}
             className="w-full flex flex-row gap-3 items-center justify-start"
           >
-            <h2 className="w-20">{color.name}</h2>
+            <h2 className="w-20 text-left font-semibold">{color.name}</h2>
             <div className="flex flex-row items-center gap-3">
               <input
                 value={color.value}
