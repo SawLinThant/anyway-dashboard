@@ -85,6 +85,7 @@ const ColorCustomization = () => {
             <h2 className="w-20 text-left font-semibold">{color.name}</h2>
             <div className="flex flex-row items-center gap-3">
               <input
+              disabled={!isEditModes[color.id]}
                 value={color.value}
                 onChange={(e) =>
                   handleChangeColorValue(color.id, e.target.value)

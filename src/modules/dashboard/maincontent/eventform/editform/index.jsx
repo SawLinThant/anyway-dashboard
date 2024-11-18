@@ -4,8 +4,13 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GET_INPUT_FIELDS } from "../../../../../graphql/query/inputfields";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import { DELETE_INPUT_FIELD_BY_ID, UPDATE_INPUT_FIELD_BY_ID } from "../../../../../graphql/mutation/inputfileds";
+import {
+  DELETE_INPUT_FIELD_BY_ID,
+  UPDATE_INPUT_FIELD_BY_ID,
+} from "../../../../../graphql/mutation/inputfileds";
 import CreateInput from "./createinput";
+import FormPrototype from "./formprotorype";
+import EditEvent from "./edittitle";
 
 const FormCustomization = () => {
   const [isEditModes, setIsEditModes] = useState({});
@@ -26,12 +31,15 @@ const FormCustomization = () => {
     },
   });
 
-  const [deleteInputField,{loading:deleteInputLoading}] = useMutation(DELETE_INPUT_FIELD_BY_ID,{
-    onCompleted:() => {
-      refetchInputData();
-      setDeletingInputId(null);
+  const [deleteInputField, { loading: deleteInputLoading }] = useMutation(
+    DELETE_INPUT_FIELD_BY_ID,
+    {
+      onCompleted: () => {
+        refetchInputData();
+        setDeletingInputId(null);
+      },
     }
-  })
+  );
 
   const [inputDataArray, setInputDataArray] = useState();
   useEffect(() => {
@@ -86,7 +94,7 @@ const FormCustomization = () => {
     }
   };
 
-  const deleteFormInput = async(id) => {
+  const deleteFormInput = async (id) => {
     const seletedInput = inputDataArray.find((input) => input.id === id);
     setDeletingInputId(id);
     try {
@@ -99,70 +107,79 @@ const FormCustomization = () => {
       setUpdatingInputId(null);
       console.log("error deleting input fields");
     }
-  }
+  };
 
   return (
-    <section className="w-full grid grid-cols-2">
-      <div className="w-full flex flex-col gap-4">
-        <div className="w-full h-14 p-4 rounded text-left bg-secondary text-primary">
-          <h2 className="font-semibold text-xl">Edit form input</h2>
-        </div>
-        <div className="w-full flex flex-col gap-2 pr-2">
-          {inputDataArray &&
-            inputDataArray.map((input) => (
-              <div className="w-full flex flex-row items-center gap-3">
-                <input
-                  value={input.name}
-                  onChange={(e) =>
-                    handleChangeNameValue(input.id, e.target.value)
-                  }
-                  className={clsx(
-                    "w-[10rem] border border-gray-700 p-2 rounded-md",
-                    {
-                      "border-none bg-transparent": !isEditModes[input.id],
+    <section className="w-full flex flex-col px-4">
+      <div className="w-full h-14 p-4 rounded text-left bg-secondary text-primary">
+        <h2 className="font-semibold text-xl">Customize Form</h2>
+      </div>
+      <div className="w-full grid grid-cols-2 mt-8">
+        <div className="w-full flex flex-col gap-4 px-4">
+          <h2 className="text-left font-bold text-xl w-full">Form Questions</h2>
+          <div className="mt-4 w-full">
+            <CreateInput refetchInputData={refetchInputData} />
+          </div>
+          <div className="w-full flex flex-col gap-2 pr-2 mt-4">
+            {inputDataArray &&
+              inputDataArray.map((input) => (
+                <div className="w-full flex flex-row items-center gap-3">
+                  <input
+                    value={input.name}
+                    disabled={!isEditModes[input.id]}
+                    onChange={(e) =>
+                      handleChangeNameValue(input.id, e.target.value)
                     }
-                  )}
-                  type="text"
-                />
-                <input
-                  value={input.question}
-                  onChange={(e) =>
-                    handleChangeQuestionValue(input.id, e.target.value)
-                  }
-                  className={clsx(
-                    "w-full border border-gray-700 p-2 rounded-md",
-                    {
-                      "border-none bg-transparent": !isEditModes[input.id],
+                    className={clsx(
+                      "w-[10rem] border p-2 rounded-md",
+                      {
+                        "border-gray-300 text-gray-400 bg-primary": !isEditModes[input.id],
+                        "border-gray-700 bg-transparent": isEditModes[input.id],
+                      }
+                    )}
+                    type="text"
+                  />
+                  <input
+                    value={input.question}
+                    disabled={!isEditModes[input.id]}
+                    onChange={(e) =>
+                      handleChangeQuestionValue(input.id, e.target.value)
                     }
-                  )}
-                  type="text"
-                />
-                <div
-                  className="hover:cursor-pointer font-bold"
-                  onClick={() => toggleEditMode(input.id)}
-                >
-                  {!isEditModes[input.id] ? (
-                    "Edit"
-                  ) : (
-                    <div>
-                      <AiOutlineClose />
-                    </div>
-                  )}
-                </div>
-                {isEditModes[input.id] && (
+                    className={clsx(
+                      "w-full border p-2 rounded-md",
+                      {
+                        "border-gray-300 text-gray-400 bg-primary": !isEditModes[input.id],
+                        "border-gray-700 bg-transparent": isEditModes[input.id],
+                      }
+                    )}
+                    type="text"
+                  />
                   <div
                     className="hover:cursor-pointer font-bold"
-                    onClick={() => updateFormInput(input.id)}
+                    onClick={() => toggleEditMode(input.id)}
                   >
-                    {updatingInputId === input.id ? (
-                      <div>
-                        <AiOutlineLoading className="animate-spin" />
-                      </div>
+                    {!isEditModes[input.id] ? (
+                      "Edit"
                     ) : (
-                      "Save"
+                      <div>
+                        <AiOutlineClose />
+                      </div>
                     )}
                   </div>
-                )}
+                  {isEditModes[input.id] && (
+                    <div
+                      className="hover:cursor-pointer font-bold"
+                      onClick={() => updateFormInput(input.id)}
+                    >
+                      {updatingInputId === input.id ? (
+                        <div>
+                          <AiOutlineLoading className="animate-spin" />
+                        </div>
+                      ) : (
+                        "Save"
+                      )}
+                    </div>
+                  )}
                   <div
                     className="hover:cursor-pointer font-bold text-red-500 w-16 flex items-center justify-center"
                     onClick={() => deleteFormInput(input.id)}
@@ -175,14 +192,15 @@ const FormCustomization = () => {
                       "Remove"
                     )}
                   </div>
-              </div>
-            ))}
+                </div>
+              ))}
+          </div>
         </div>
-        <div className="mit-4 w-full">
-          <CreateInput refetchInputData={refetchInputData}/>
+        <div className="w-full border-l border-gray-500 flex flex-col items-center justify-center gap-4 px-4">
+          <h2 className="text-left font-bold text-xl w-full">Form Prototype</h2>
+          <FormPrototype />
         </div>
       </div>
-      <div></div>
     </section>
   );
 };
