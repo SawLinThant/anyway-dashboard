@@ -15,10 +15,10 @@ export const SidebarRoutes = [
         path: '/dashboard/luckydraw',
         icon: <GiPerspectiveDiceSixFacesRandom size={20}/>
     },
-    {
-        id: 'eventform',
-        label: 'Event Form',
-        path: '/dashboard/eventform',
-        icon: <FaWpforms  size={20}/>
-    },
+    // {
+    //     id: 'eventform',
+    //     label: 'Event Form',
+    //     path: '/dashboard/eventform',
+    //     icon: <FaWpforms  size={20}/>
+    // },
 ]
